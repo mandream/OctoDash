@@ -106,6 +106,7 @@ interface OctoDash {
   screenWakeupCommand: string;
   showExtruderControl: boolean;
   showNotificationCenterIcon: boolean;
+  cncMode: boolean;
 }
 
 export interface CustomAction {

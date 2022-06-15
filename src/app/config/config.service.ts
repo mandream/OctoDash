@@ -338,4 +338,8 @@ export class ConfigService {
   public showNotificationCenterIcon(): boolean {
     return this.config.octodash.showNotificationCenterIcon;
   }
+
+  public iscncMode(): boolean {
+    return this.config.octodash.cncMode;
+  }
 }

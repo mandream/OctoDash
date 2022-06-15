@@ -76,7 +76,7 @@
               style="width: 44.94vw"
               [(ngModel)]="config.printer.name"
               required />
-            <table>
+            <table *ngIf="!cncMode">
               <tr>
                 <td style="width: 25.6vw; display: block">
                   <label for="xySpeed" class="settings__input-label">
@@ -158,8 +158,8 @@
               </tr>
             </table>
           </form>
-          <span class="settings__heading-2" i18n="@@general-filament">Filament</span>
-          <form class="settings__form">
+          <span *ngIf="!cncMode" class="settings__heading-2" i18n="@@general-filament">Filament</span>
+          <form *ngIf="!cncMode" class="settings__form">
             <table>
               <tr>
                 <td colspan="2" style="text-align: center">
@@ -359,6 +359,15 @@
               <span class="settings__checkbox-checked" *ngIf="config.octodash.previewProgressCircle"></span>
             </span>
             <span class="settings__checkbox-descriptor" i18n="@@always-circular">Always use circular progress bar</span>
+          </div>
+          <div
+            class="settings__checkbox-container"
+            (click)="config.octodash.cncMode = !config.octodash.cncMode"
+          >
+            <span class="settings__checkbox">
+              <span class="settings__checkbox-checked" *ngIf="config.octodash.cncMode"></span>
+            </span>
+            <span class="settings__checkbox-descriptor" i18n="@@always-circular">CNC Mode</span>
           </div>
           <br />
           <span class="settings__heading-2" i18n="@@invert-axis-control">Invert Axis Control</span>

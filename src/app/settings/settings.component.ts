@@ -33,6 +33,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
   private overwriteNoSave = false;
   private pages = [];
   public update = false;
+  public cncMode = false;
 
   public constructor(
     private configService: ConfigService,
@@ -42,6 +43,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
   ) {
     this.config = this.configService.getCurrentConfig();
     this.config.octoprint.urlSplit = this.configService.splitOctoprintURL(this.config.octoprint.url);
+    this.cncMode = this.configService.iscncMode();
   }
 
   public ngOnInit(): void {
