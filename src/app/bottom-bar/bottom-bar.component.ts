@@ -61,6 +61,9 @@ export class BottomBarComponent implements OnDestroy {
     if (printerState === PrinterState.socketDead) {
       return 'socket is dead';
     }
+    if (this.configService.iscncMode() && printerState === PrinterState.printing){
+      return 'cutting';
+    }
     return PrinterState[printerState];
   }
 
