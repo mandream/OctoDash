@@ -20,14 +20,18 @@
       <img src="assets/pause.svg" />
       <ng-container i18n="@@control-pause">pause</ng-container>
     </div>
-    <div class="print-control__action" (click)="adjust($event)">
+    <div *ngIf="!cncMode" class="print-control__action" (click)="adjust($event)">
+      <img src="assets/adjust.svg" />
+      <ng-container i18n="@@control-adjust">adjust</ng-container>
+    </div>
+    <div *ngIf="cncMode" class="print-control__action" (click)="babystep($event)">
       <img src="assets/adjust.svg" />
       <ng-container i18n="@@control-adjust">adjust</ng-container>
     </div>
   </div>
   <div *ngIf="view === controlView.CANCEL" (click)="stopPropagation($event)">
     <img src="assets/cancel.svg" class="print-control__center-icon" />
-    <span class="print-control__confirm" i18n="@@cancel-print">cancel print?</span>
+    <span class="print-control__confirm" i18n="@@cancel-print">cancel {{cncMode ? "cut" : "print"}}?</span>
     <div style="text-align: center">
       <span class="print-control__cancel__action" (click)="cancelPrint($event)" i18n="@@cancel-yes">yes</span>
       <span class="print-control__cancel__action" (click)="backToControlScreen($event)" i18n="@@cancel-no">no</span>
@@ -43,14 +47,14 @@
       </tr>
     </table>
     <img src="assets/pause.svg" class="print-control__center-icon print-control__pause__icon" />
-    <span class="print-control__confirm" i18n="@@print-pause">print paused</span>
+    <span class="print-control__confirm" i18n="@@print-pause">{{cncMode ? "cut" : "print"}} paused</span>
     <div class="print-control__pause__resume">
       <div (click)="restart($event)" i18n="@@print-restart">restart</div>
       <div (click)="resume($event)">
         <img src="assets/resume.svg" class="print-control__pause__resume-icon" />
         <ng-container i18n="@@print-resume">resume</ng-container>
       </div>
-      <div (click)="changeFilament($event)" i18n="@@print-filament">filament</div>
+      <div *ngIf="!cncMode" (click)="changeFilament($event)" i18n="@@print-filament">filament</div>
     </div>
   </div>
   <div *ngIf="view === controlView.ADJUST" (click)="stopPropagation($event)">
@@ -189,7 +193,11 @@
   <div *ngIf="view === controlView.BABYSTEP" (click)="stopPropagation($event)">
     <table class="top-bar">
       <tr>
-        <td class="top-bar__back" (click)="adjust($event)" matRipple [matRippleUnbounded]="false">
+        <td *ngIf="!cncMode" class="top-bar__back" (click)="adjust($event)" matRipple [matRippleUnbounded]="false">
+          <img src="assets/back.svg" class="top-bar__back-icon" />
+          <ng-container i18n="@@babystep-back">back</ng-container>
+        </td>
+        <td *ngIf="cncMode" class="top-bar__back" (click)="backToControlScreen($event)" matRipple [matRippleUnbounded]="false">
           <img src="assets/back.svg" class="top-bar__back-icon" />
           <ng-container i18n="@@babystep-back">back</ng-container>
         </td>

@@ -27,6 +27,7 @@ export class PrintControlComponent implements OnInit, OnDestroy {
   public fanSpeed: number;
   public feedrate: number;
   public zOffset: number;
+  public cncMode =  false;
 
   public constructor(
     private jobService: JobService,
@@ -40,6 +41,7 @@ export class PrintControlComponent implements OnInit, OnDestroy {
     this.fanSpeed = 0;
     this.feedrate = 100;
     this.zOffset = 0;
+    this.cncMode = this.configService.iscncMode();
   }
 
   public ngOnInit(): void {
