@@ -69,9 +69,10 @@ export class FilesOctoprintService implements FilesService {
                       thumbnail: fileOrFolder.thumbnail
                         ? this.configService.getApiURL(fileOrFolder.thumbnail, false)
                         : 'assets/object.svg',
-                      printTime: this.conversionService.convertSecondsToHours(
-                        fileOrFolder.gcodeAnalysis.estimatedPrintTime,
-                      ),
+                      printTime: fileOrFolder.gcodeAnalysis.estimatedPrintTime ? 
+                                      this.conversionService.convertSecondsToHours(
+                                          fileOrFolder.gcodeAnalysis.estimatedPrintTime,
+                      ) : undefined,
                       filamentWeight: this.conversionService.convertFilamentLengthToWeight(
                         _.sumBy(_.values(fileOrFolder.gcodeAnalysis.filament), tool => tool.length),
                       ),
@@ -128,7 +129,7 @@ export class FilesOctoprintService implements FilesService {
           thumbnail: file.thumbnail ? this.configService.getApiURL(file.thumbnail, false) : 'assets/object.svg',
           ...(file.gcodeAnalysis
             ? {
-                printTime: this.conversionService.convertSecondsToHours(file.gcodeAnalysis.estimatedPrintTime),
+                printTime: file.gcodeAnalysis.estimatedPrintTime ? this.conversionService.convertSecondsToHours(file.gcodeAnalysis.estimatedPrintTime) : undefined,
                 filamentWeight: this.conversionService.convertFilamentLengthToWeight(
                   _.sumBy(_.values(file.gcodeAnalysis.filament), tool => tool.length),
                 ),
