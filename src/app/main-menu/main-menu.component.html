@@ -1,16 +1,16 @@
-<div class="main-menu">
+<div [ngClass]="cncMode ? 'main-menu__cnc' : 'main-menu'">
   <span class="main-menu__heading">
-    OctoDash<span class="main-menu__heading" style="color: #1ec02c; display: inline">.</span>
+    OctoDash<span *ngIf="cncMode" style="color: #228ce2; display: inline">(cnc)</span><span class="main-menu__heading" style="color: #1ec02c; display: inline">.</span>
   </span>
   <img src="assets/settings.svg" class="main-menu__settings-icon" (click)="showSettings()" />
   <div class="main-menu__update-notifier" *ngIf="service.updateAvailable"></div>
-  <table class="main-menu__options">
+  <table [ngClass]="cncMode ? 'main-menu__options__cnc' : 'main-menu__options'">
     <tr>
       <td routerLink="/files" matRipple [matRippleUnbounded]="false" [matRippleCentered]="true">
         <img src="assets/folder.svg" class="main-menu__option-icon main-menu__option-icon__1" />
         <ng-container i18n="@@menu-files">files</ng-container>
       </td>
-      <td routerLink="/filament" matRipple [matRippleUnbounded]="false" [matRippleCentered]="true">
+      <td *ngIf="!cncMode" routerLink="/filament" matRipple [matRippleUnbounded]="false" [matRippleCentered]="true">
         <img src="assets/filament.svg" class="main-menu__option-icon main-menu__option-icon__2" />
         <ng-container i18n="@@menu-filament">filament</ng-container>
       </td>

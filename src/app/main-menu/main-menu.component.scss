@@ -33,6 +33,19 @@
     }
   }
 
+  &__options__cnc {
+    margin-top: 10vw;
+    margin-left: 10vw;
+    width: 90vw;
+
+    & td {
+      width: 40vw;
+      display: inline-block;
+      text-align: center;
+      font-weight: 500;
+    }
+  }
+
   &__option-icon {
     display: block;
     padding-bottom: 4vh;
@@ -61,5 +74,11 @@
     position: absolute;
     right: 1.9vw;
     top: 13vh;
+  }
+
+  .main-menu__cnc {
+    display: block;
+    width: 100%;
+    height: 70vh;
   }
 }
