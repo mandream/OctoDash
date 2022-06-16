@@ -81,10 +81,10 @@
           <span class="files__info-value">
             {{ file.size }}<span class="files__info-unit" i18n="@@files-mb-2">mb</span>
           </span>
-          <span class="files__info-value" *ngIf="file.hasOwnProperty('filamentWeight')">
+          <span class="files__info-value" *ngIf="file.hasOwnProperty('filamentWeight') && !cncMode">
             {{ file.filamentWeight }}<span class="files__info-unit" i18n="@@files-g">g</span>
           </span>
-          <span class="files__info-value" *ngIf="file.hasOwnProperty('printTime')">
+          <span class="files__info-value" *ngIf="file.hasOwnProperty('printTime') && file.printTime!=undefined">
             {{ file.printTime }}<span class="files__info-unit" i18n="@@files-h">h</span>
           </span>
         </div>
@@ -107,10 +107,10 @@
     <table class="file__details">
       <tr>
         <td>{{ fileDetail.size }}<span class="file__details-name" i18n="@@files-mb-3">mb</span></td>
-        <td *ngIf="fileDetail.hasOwnProperty('printTime')">
+        <td *ngIf="fileDetail.hasOwnProperty('printTime') && fileDetail.printTime!=undefined">
           {{ fileDetail.printTime }}<span class="file__details-name" i18n="@@files-h-2">h</span>
         </td>
-        <td *ngIf="fileDetail.hasOwnProperty('filamentWeight')">
+        <td *ngIf="fileDetail.hasOwnProperty('filamentWeight') && !cncMode">
           {{ fileDetail.filamentWeight }}<span class="file__details-name" i18n="@@files-g-2">g</span>
         </td>
       </tr>
@@ -118,13 +118,13 @@
     <table class="file__actions">
       <tr>
         <td>
-          <span matRipple [matRippleUnbounded]="true" [matRippleCentered]="true">
+          <span *ngIf="!cncMode" matRipple [matRippleUnbounded]="true" [matRippleCentered]="true">
             <img src="assets/upload.svg" class="file__actions-icon" (click)="loadFile(fileDetail.path)" />
           </span>
         </td>
         <td>
           <span matRipple [matRippleUnbounded]="true" [matRippleCentered]="true">
-            <img src="assets/print.svg" class="file__actions-icon" (click)="printFile(fileDetail.path)" />
+            <img [src]="cncMode ? 'assets/cut.svg' : 'assets/print.svg'" class="file__actions-icon" (click)="printFile(fileDetail.path)" />
           </span>
         </td>
         <td>

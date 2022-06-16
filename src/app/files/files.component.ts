@@ -23,6 +23,7 @@ export class FilesComponent {
   public sortingAttribute: 'name' | 'date' | 'size';
   public sortingOrder: 'asc' | 'dsc';
   public showSorting = false;
+  public cncMode = false;
 
   public loadingOptions: AnimationOptions = {
     path: 'assets/animations/loading.json',
@@ -43,6 +44,8 @@ export class FilesComponent {
     this.sortingOrder = this.configService.getDefaultSortingOrder();
 
     this.openFolder(this.currentFolder);
+
+    this.cncMode = this.configService.iscncMode();
   }
 
   public openFolder(folderPath: string): void {

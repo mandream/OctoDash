@@ -20,6 +20,8 @@ export class JobStatusComponent implements OnInit, OnDestroy {
   public thumbnail: string;
   public showPreviewWhilePrinting: boolean;
 
+  public cncMode = false;
+
   public constructor(
     private jobService: JobService,
     private fileService: FilesService,
@@ -28,6 +30,7 @@ export class JobStatusComponent implements OnInit, OnDestroy {
     private configService: ConfigService,
   ) {
     this.showPreviewWhilePrinting = this.configService.showThumbnailByDefault();
+    this.cncMode = this.configService.iscncMode();
   }
 
   public ngOnInit(): void {

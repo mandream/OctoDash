@@ -11,6 +11,7 @@ import { FilesService } from '../services/files/files.service';
 })
 export class MainScreenComponent {
   public printing = false;
+  public cncMode = false;
 
   public constructor(
     private eventService: EventService,
@@ -18,6 +19,8 @@ export class MainScreenComponent {
     private configService: ConfigService,
     private router: Router,
   ) {
+    this.cncMode = this.configService.iscncMode();
+    
     if (!this.configService.isInitialized()) {
       this.router.navigate(['/']);
     }
